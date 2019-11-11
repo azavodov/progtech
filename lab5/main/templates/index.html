@@ -31,35 +31,47 @@
             height: 100%;
         }
 
-        #person_photo{
-            width: 300px;
-            height: 300px;
+        #photo{
+            width: 100%;
         }
     </style>
 
     <div class="ui middle aligned stackable grid" id="root_grid">
-        <div class="four wide column"></div>
-        <div class="eight wide column">
-            <div class="ui blue fluid segment">
-
-            </div>
+        <div class="three wide column"></div>
+        <div class="ten wide column">
             <div class="ui stackable grid">
                 <div class="eight wide column">
-                    <div class="ui yellow fluid segment">
-                        <img src="#" title="person" alt="person" id="person_photo">
+                    <div class="ui fluid segment">
+                        <img src="#" title="person" alt="person" id="photo">
                     </div>
                 </div>
                 <div class="eight wide column">
-                    <div class="ui yellow fluid segment">
-
+                    <div class="ui blue fluid segment">
+                        <h3 class="ui dividing header">Уровень сложности</h3>
+                        <select class="ui fluid dropdown" id="level" onchange="generate_game()">
+                            <option value="0">Просто</option>
+                            <option value="1">Сложненько</option>
+                            <option value="2">ОГНИЩЕ</option>
+                        </select>
                     </div>
+                    <div class="ui blue fluid segment">
+                        <h3 class="ui dividing header">Кто это?</h3>
+                        <div id="user_answer_container"></div>
+                    </div>
+                    <div class="ui blue fluid segment">
+                        <h3 class="ui dividing header">Результат</h3>
+                        <div class="ui header" id="result"></div>
+                    </div>
+                    <div class="ui blue fluid segment">
+                        <h3 class="ui dividing header">Верный ответ</h3>
+                        <div class="ui header" id="answer"></div>
+                    </div>
+                    <div class="ui blue button" onclick="generate_game()">Следующее фото</div>
                 </div>
             </div>
-            <div class="ui green fluid segment">
 
-            </div>
         </div>
-        <div class="four wide column"></div>
+        <div class="three wide column"></div>
     </div>
 
 </body>
