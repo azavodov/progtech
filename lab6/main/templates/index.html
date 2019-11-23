@@ -1,0 +1,32 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <!-- Semantic UI -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css" media="screen"
+          rel="stylesheet" type="text/css">
+    <!-- Jquery -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <!--  axios -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!-- Semantic UI -->
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
+
+    <script type="text/javascript" src="{% static 'main.js' %}"></script>
+
+    <title>Simple RSS reader</title>
+</head>
+<body>
+
+    <div class="ui center aligned grid" id="root_grid">
+        <div class="twelve wide column">
+            Simple RSS reader
+        </div>
+    </div>
+
+</body>
+</html>
