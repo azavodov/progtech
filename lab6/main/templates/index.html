@@ -22,6 +22,18 @@
 </head>
 <body>
 
+    <style>
+        img {
+            display: none;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            display: none;
+        }
+        br {
+            display: none;
+        }
+    </style>
+
     <div class="ui center aligned padded grid" id="root_grid">
         <div class="twelve wide left aligned column">
 
@@ -34,7 +46,11 @@
 
             <div class="ui divider"></div>
 
-            <div class="ui segment" id="feeds"></div>
+            <div class="ui segment" id="feeds" style="min-height: 70px">
+                <div class='ui divided link items' id='entries_container'></div>
+            </div>
+
+            <div class="ui basic fluid button" onclick="load_feeds()">Load</div>
 
         </div>
     </div>

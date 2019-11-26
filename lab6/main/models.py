@@ -1,3 +1,6 @@
+from datetime import datetime
+
+import feedparser
 from django.db import models
 
 
@@ -14,6 +17,18 @@ class Channel(models.Model):
             "url": self.url,
             "name": self.name,
         }
+
+    def fetch_feeds(self):
+        feeds = feedparser.parse(self.url)
+        for entry in feeds['entries']:
+            if not len(Feed.objects.filter(link=entry['link'])):
+                Feed.objects.create(
+                    channel=self,
+                    title=entry['title'],
+                    link=entry['link'],
+                    description=entry['summary'],
+                    published_time=datetime(*(entry['published_parsed'][0:6])),
+                )
 
 
 class Feed(models.Model):
@@ -32,7 +47,7 @@ class Feed(models.Model):
     def as_dict(self):
         return {
             "id": self.pk,
-            "source_id": self.channel.pk,
+            "channel_id": self.channel.pk,
             "title": self.title,
             "link": self.link,
             "description": self.description,

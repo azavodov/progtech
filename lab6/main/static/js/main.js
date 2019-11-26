@@ -5,6 +5,9 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 });
 
+let OFFSET = 0;
+let COUNT = 10;
+
 function get_channels() {
     return new Promise((resolve, reject) => {
         axios.get(`/channels`).then(response => {
@@ -16,7 +19,11 @@ function get_channels() {
                         .text(channels[channel]['name']));
             });
             $('#channel').dropdown({
-                onChange: () => { load_feeds(); }
+                onChange: () => {
+                    OFFSET = 0;
+                    document.getElementById("entries_container").innerHTML = "";
+                    load_feeds();
+                }
             });
             resolve();
         })
@@ -24,10 +31,27 @@ function get_channels() {
 }
 
 function load_feeds(){
+    document.getElementById('feeds').classList.add("loading");
     let channel_id = $('#channel').dropdown('get value');
-    axios.get(`/feeds?c_id=${channel_id}`).then(response => {
-        let container = document.getElementById('feeds');
+    axios.get(`/feeds?c_id=${channel_id}&offset=${OFFSET}&count=${COUNT}`).then(response => {
+        document.getElementById('feeds').classList.remove("loading");
+        let container = document.getElementById('entries_container');
         let feeds = response.data['feeds'];
-        console.log(feeds);
+        for (let i in feeds) {
+            container.innerHTML += `
+                <div class="item"">
+                    <div class="content">
+                      <a class="header" href="${feeds[i]['link']}" target="_blank">${feeds[i]['title']}</a>
+                      <div class="meta">
+                        <span class="cinema">${feeds[i]['published_time']}</span>
+                      </div>
+                      <div class="description">
+                        ${feeds[i]['description']}
+                      </div>
+                    </div>
+                </div>
+            `;
+        }
+        OFFSET += COUNT;
     })
 }

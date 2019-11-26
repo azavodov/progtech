@@ -19,7 +19,10 @@ def get_feeds(request):
     offset = int(request.GET.get('offset', 0))
     count = int(request.GET.get('count', 10))
 
-    feeds = Feed.objects.filter(channel__id=channel_id) if channel_id else Feed.objects.all()
+    channel = Channel.objects.get(id=channel_id)
+    channel.fetch_feeds()
+
+    feeds = Feed.objects.filter(channel=channel) if channel_id else Feed.objects.all()
     feeds = list(feeds)[offset: offset+count]
 
     return JsonResponse({
