@@ -38,19 +38,24 @@
         <div class="twelve wide left aligned column">
 
             <form class="ui form">
-                <div class="inline field">
-                    <label for="channel">Choose RSS channel: </label>
-                    <select class="ui dropdown" id="channel"></select>
+                <div class="inline fields">
+                    <div class="field">
+                        <label for="channel">Choose RSS channel: </label>
+                        <select class="ui dropdown" id="channel"></select>
+                    </div>
+                    <div class="field">
+                        <div class="ui basic icon button" title="Reload feeds" onclick="reload_feeds()" id="reload_button">
+                            <i class="sync icon"></i>
+                        </div>
+                    </div>
                 </div>
             </form>
 
             <div class="ui divider"></div>
 
-            <div class="ui segment" id="feeds" style="min-height: 70px">
-                <div class='ui divided link items' id='entries_container'></div>
-            </div>
+            <div class='ui divided link items' id='entries_container'></div>
 
-            <div class="ui basic fluid button" onclick="load_feeds()">Load</div>
+            <div class="ui basic fluid button" onclick="load_feeds()" id="load_button">Load</div>
 
         </div>
     </div>
