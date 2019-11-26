@@ -16,15 +16,26 @@
     <script type="text/javascript"
             src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
 
-    <script type="text/javascript" src="{% static 'main.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
 
     <title>Simple RSS reader</title>
 </head>
 <body>
 
-    <div class="ui center aligned grid" id="root_grid">
-        <div class="twelve wide column">
-            Simple RSS reader
+    <div class="ui center aligned padded grid" id="root_grid">
+        <div class="twelve wide left aligned column">
+
+            <form class="ui form">
+                <div class="inline field">
+                    <label for="channel">Choose RSS channel: </label>
+                    <select class="ui dropdown" id="channel"></select>
+                </div>
+            </form>
+
+            <div class="ui divider"></div>
+
+            <div class="ui segment" id="feeds"></div>
+
         </div>
     </div>
 

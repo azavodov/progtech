@@ -9,7 +9,7 @@ def index(request):
 
 
 def get_channels(request):
-    return JsonResponse({'sources': [
+    return JsonResponse({'channels': [
         c.as_dict() for c in Channel.objects.all()
     ]})
 
