@@ -1,3 +1,5 @@
+from django.core.exceptions import ValidationError
+from django.core.validators import URLValidator
 from django.http import JsonResponse
 from django.shortcuts import render
 
@@ -12,6 +14,27 @@ def get_channels(request):
     return JsonResponse({'channels': [
         c.as_dict() for c in Channel.objects.all()
     ]})
+
+
+def add_channels(request):
+    url = request.GET.get('url', None)
+    name = request.GET.get('name', None)
+
+    if url is None or name is None:
+        return JsonResponse({'status': 'One of the fields is None'})
+
+    try:
+        val = URLValidator()
+        val(url)
+    except ValidationError as e:
+        return JsonResponse({'status': 'Incorrect url'})
+
+    Channel.objects.create(
+        name=name,
+        url=url,
+    )
+
+    return JsonResponse({'status': 'OK'})
 
 
 def get_feeds(request):

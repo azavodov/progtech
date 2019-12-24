@@ -34,6 +34,26 @@
         }
     </style>
 
+    <div class="ui modal" id="add_channel">
+        <div class="header">Add new RSS channel</div>
+        <div class="content" id='url-for-approve'>
+            <div class="ui fluid form">
+                <div class="field">
+                    <label for="new_channel_name">RSS chanel name</label>
+                    <input type="text" id="new_channel_name">
+                </div>
+                <div class="field">
+                    <label for="new_channel_url">RSS chanel URL</label>
+                    <input type="url" id="new_channel_url">
+                </div>
+            </div>
+        </div>
+        <div class="actions">
+            <div class="ui approve green button">Add</div>
+            <div class="ui cancel blue button">Cancel</div>
+        </div>
+    </div>
+
     <div class="ui center aligned padded grid" id="root_grid">
         <div class="twelve wide left aligned column">
 
@@ -46,6 +66,12 @@
                     <div class="field">
                         <div class="ui basic icon button" title="Reload feeds" onclick="reload_feeds()" id="reload_button">
                             <i class="sync icon"></i>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="ui basic icon button" title="Add new RSS channel" onclick="new_rss_channel_modal()" id="add_new_channel_btn">
+                            <i class="plus icon"></i>
+                            Add RSS channel
                         </div>
                     </div>
                 </div>

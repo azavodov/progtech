@@ -8,9 +8,43 @@ document.addEventListener("DOMContentLoaded", () => {
 let OFFSET = 0;
 let COUNT = 5;
 
+
+function new_rss_channel_modal() {
+    document.getElementById('new_channel_name').value = "";
+    document.getElementById('new_channel_url').value = "";
+    $('#add_channel')
+        .modal({
+            closable: false,
+            onApprove: function () {
+                add_new_rss_channel();
+            }
+        })
+        .modal('show')
+    ;
+}
+
+function add_new_rss_channel() {
+    let channel_name = document.getElementById('new_channel_name').value;
+    let channel_url = document.getElementById('new_channel_url').value;
+
+    axios.get(`/channels/add?name=${channel_name}&url=${channel_url}`)
+        .then(response => {
+            if (response.data.status === "OK") {
+                get_channels();
+            } else {
+                console.log(response.data.status);
+            }
+        })
+        .catch(error => {
+            console.log(error);
+        });
+}
+
+
 function get_channels() {
     return new Promise((resolve, reject) => {
         axios.get(`/channels`).then(response => {
+            document.getElementById('channel').innerText = "";
             let channels = response.data['channels'];
             $.each(channels, (channel) => {
                 $('#channel')
